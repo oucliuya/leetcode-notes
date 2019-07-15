@@ -4,6 +4,8 @@
 
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
+**翻译**给定一个整数数组和一个目标整数，找出这个数组中两个和为目标整数的元素，输出它们的位置。你可以假设每个输入刚好有一个答案，并且不能两次使用同一个元素。
+
 **Example:**
 
 ```python
