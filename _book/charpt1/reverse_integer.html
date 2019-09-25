@@ -1043,6 +1043,45 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="7-reverse-integer">7. Reverse Integer</h1>
+<h2 id="1-&#x9898;&#x76EE;">1 &#x9898;&#x76EE;</h2>
+<p>Given a 32-bit signed integer, reverse digits of an integer.</p>
+<p>&#x7ED9;&#x5B9A;&#x4E00;&#x4E2A;32&#x6BD4;&#x7279;&#x7684;&#x6709;&#x7B26;&#x53F7;&#x6574;&#x6570;&#xFF0C;&#x7FFB;&#x8F6C;&#x6570;&#x5B57;</p>
+<p><strong>Example1:</strong></p>
+<pre><code>Input: 123
+Output: 321
+</code></pre><p><strong>Example2:</strong></p>
+<pre><code>Input: -123
+Output: -321
+</code></pre><p><strong>Example3:</strong></p>
+<pre><code>Input: 120
+Output: 21
+</code></pre><p><strong>Note:</strong>
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [&#x2212;2^31,  2^31 &#x2212; 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x7684;&#x73AF;&#x5883;&#x53EA;&#x80FD;&#x5B58;&#x50A8;32bit&#x4F4D;&#x4EE5;&#x5185;&#x7684;&#x6574;&#x6570;:[&#x2212;2^31,  2^31 &#x2212; 1]&#x3002;&#x5BF9;&#x4E8E;&#x672C;&#x9898;&#x76EE;&#xFF0C;&#x5982;&#x679C;&#x7FFB;&#x8F6C;&#x7684;&#x6570;&#x5B57;&#x8D85;&#x8FC7;&#x4E86;&#x8303;&#x56F4;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;0.</p>
+<p>&#x6765;&#x6E90;&#xFF1A;&#x529B;&#x6263;&#xFF08;LeetCode&#xFF09;
+&#x94FE;&#x63A5;&#xFF1A;<a href="https://leetcode-cn.com/problems/reverse-integer" target="_blank">https://leetcode-cn.com/problems/reverse-integer</a></p>
+<h2 id="2-&#x89E3;&#x6CD5;&#x4E00;">2 &#x89E3;&#x6CD5;&#x4E00;</h2>
+<p><strong>&#x5F39;&#x51FA;&#x548C;&#x538B;&#x5165;&#x6570;&#x5B57;&amp;&#x6EA2;&#x51FA;&#x524D;&#x68C0;&#x67E5;&#xFF1A;</strong> <code>x % 10</code> &#x53EF;&#x4EE5;&#x628A;&#x6700;&#x53F3;&#x8FB9;&#x4E00;&#x4F4D;&#x5F39;&#x51FA;&#x6765;&#x3002; &#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;pop&#x6765;&#x5B58;&#x50A8;&#x53F3;&#x4FA7;&#x5F39;&#x51FA;&#x7684;&#x6570;&#x5B57;&#xFF0C;&#x7528;&#x4E00;&#x4E2A;r&#x6765;&#x5B58;&#x50A8;&#x8FD4;&#x56DE;&#x503C;&#x3002;&#x6BCF;&#x6B21;&#x4ECE;x&#x7684;&#x6700;&#x53F3;&#x4FA7;&#x5F39;&#x51FA;&#x4E00;&#x503C;&#x5B58;&#x5165;pop&#x4E2D;&#xFF0C;&#x518D;&#x628A;pop &#x538B;&#x5165;&#x5230; r &#x4E2D;&#x3002; &#x505C;&#x6B62;&#x6761;&#x4EF6;&#x662F; x &#x4E3A; 0&#xFF0C;&#x5173;&#x952E;&#x662F;&#x8981;&#x68C0;&#x67E5;r&#x662F;&#x5426;&#x8D8A;&#x754C;&#x3002;</p>
+<p>&#x5982;&#x679C; r &#x662F;&#x6B63;&#x6570;&#xFF0C;&#x5F53; <code>r &gt; Integer.MAX_VALUE /10</code> &#x65F6;&#xFF0C;&#x4E0B;&#x4E00;&#x6B21;&#x6267;&#x884C;&#x538B;&#x5165;&#x64CD;&#x4F5C; <code>r = r * 10 + pop</code> &#x65F6;&#xFF0C;r &#x5FC5;&#x7136;&#x8D8A;&#x754C;&#xFF1B;&#x5F53;<code>r == Integer.MAX_VALUE/10 = 2147483647/10 = 2147483640</code> &#x65F6;&#xFF0C;&#x4E0B;&#x6B21;&#x6267;&#x884C;&#x538B;&#x5165;&#x64CD;&#x4F5C;&#x662F;&#x5426;&#x8D8A;&#x754C;&#x53D6;&#x51B3;&#x4E8E; pop &#x7684;&#x5927;&#x5C0F;&#xFF0C; &#x5982;&#x679C; <code>pop &gt; 7</code>, &#x5219;  <code>r = r * 10 + pop</code> &#x5FC5;&#x7136;&#x8D8A;&#x754C;&#x3002;</p>
+<p>&#x5982;&#x679C;r &#x662F;&#x8D1F;&#x6570;&#xFF0C; &#x5F53; <code>r &lt; Integer.MIN_VALUE / 10</code> &#x65F6;&#xFF0C;&#x4E0B;&#x4E00;&#x6B21;&#x6267;&#x884C;&#x538B;&#x5165;&#x64CD;&#x4F5C;&#x5FC5;&#x7136;&#x8D8A;&#x754C;&#xFF1B; &#x5F53;<code>r = Integer.MIN_VALUE / 10 = -2147483648 / 10  = - 2147483640</code> &#x65F6;&#xFF0C; &#x4E0B;&#x6B21;&#x6267;&#x884C;&#x538B;&#x5165;&#x64CD;&#x4F5C;&#x662F;&#x5426;&#x8D8A;&#x754C;&#x53D6;&#x51B3;&#x4E8E;pop&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x5982;&#x679C; <code>pop &lt; -8</code>, &#x5219;&#x4E0B;&#x6B21;&#x538B;&#x5165;&#x5FC5;&#x7136;&#x8D8A;&#x754C;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">reverse</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>{
+        <span class="hljs-keyword">int</span> r = <span class="hljs-number">0</span>, pop = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (x != <span class="hljs-number">0</span>){
+            <span class="hljs-keyword">if</span> (r &gt; Integer.MAX_VALUE / <span class="hljs-number">10</span> || (r == Integer.MAX_VALUE / <span class="hljs-number">10</span> &amp;&amp; pop &gt; <span class="hljs-number">7</span>)){
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            }
+            <span class="hljs-keyword">if</span> (r &lt; Integer.MIN_VALUE / <span class="hljs-number">10</span> || (r == Integer.MIN_VALUE / <span class="hljs-number">10</span> &amp;&amp; pop &lt; -<span class="hljs-number">8</span>)){
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            }
+            pop = x % <span class="hljs-number">10</span>;
+            x /= <span class="hljs-number">10</span>;
+            r = r * <span class="hljs-number">10</span> + pop;
+        }
+        <span class="hljs-keyword">return</span> r;
+    }
+}
+</code></pre>
 
                                 
                                 </section>
@@ -1086,7 +1125,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"7. Reverse Integer","level":"1.2.7","depth":2,"next":{"title":"8. String to Integer(atoi)","level":"1.2.8","depth":2,"path":"charpt1/string_to_integer.md","ref":"charpt1/string_to_integer.md","articles":[]},"previous":{"title":"6. ZigZag Conversion","level":"1.2.6","depth":2,"path":"charpt1/zig_zag_conversion.md","ref":"charpt1/zig_zag_conversion.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"charpt1/reverse_integer.md","mtime":"2019-07-13T09:01:43.799Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-24T06:13:08.848Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"7. Reverse Integer","level":"1.2.7","depth":2,"next":{"title":"8. String to Integer(atoi)","level":"1.2.8","depth":2,"path":"charpt1/string_to_integer.md","ref":"charpt1/string_to_integer.md","articles":[]},"previous":{"title":"6. ZigZag Conversion","level":"1.2.6","depth":2,"path":"charpt1/zig_zag_conversion.md","ref":"charpt1/zig_zag_conversion.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"charpt1/reverse_integer.md","mtime":"2019-09-25T11:42:19.561Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-25T03:13:10.097Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
