@@ -33,6 +33,8 @@ The median is (2 + 3)/2 = 2.5
 
 ## 2 解法一
 
+直观暴力：自然想到先将两个有序数组合并为一个有序数组，然后再找它的中间一个数或两个数，算出其中位数。
+
 ```java
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
