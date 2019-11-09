@@ -68,4 +68,6 @@
     * [192. Word Frequency](charpt3/word_frequency.md)
 * [四 多线程](charpt4/multithreading.md)
     * [1114. Print in Order](charpt4/print_in_order.md)
+* [五 数据结构](charpt5/data_structure.md)
+    * [1115. tree](charpt5/tree.md)
 
