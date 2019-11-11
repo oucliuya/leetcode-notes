@@ -53,19 +53,29 @@ class Solution {
 循环终止条件：start指针和end指针都不为null。
 
 ```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {  
 public ListNode swapPairs(ListNode head) {
-    	ListNode pre = new ListNode(0);
-    	pre.next = head;
-    	ListNode temp = pre;
-    	while (temp.next != null && temp.next.next != null) {
-    		ListNode start = temp.next;
-        	ListNode end = start.next;
-        	start.next = end.next;
-        	end.next = start;
-        	temp.next = end;
-        	temp = start;
-    	}
-    	return pre.next;
-    }
+        ListNode pre = new ListNode(0);
+        pre.next = head;
+        ListNode temp = pre;
+        while (temp.next != null && temp.next.next != null) {
+          ListNode start = temp.next;
+            ListNode end = start.next;
+            start.next = end.next;
+            end.next = start;
+            temp.next = end;
+            temp = start;
+        }
+        return pre.next;
+      }
+}
 ```
 
