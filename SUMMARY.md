@@ -62,7 +62,7 @@
     * [83. Remove Duplicates from Sorted List](charpt1/remove_duplicates_from_sorted_list.md)
     * [86. Partition List](charpt1/partition_list.md)
     * [90. Subsets II](charpt1/subsets2.md)
-    * [92. Reverse Linked List](charpt1/reverse_linked_list_2.md)
+    * [92. Reverse Linked List II](charpt1/reverse_linked_list_2.md)
     * [109. Convert Sorted List to Binary Search Tree](charpt1/convert_sorted_list_to_binary_search_tree.md)
     * [121. Best Time to Buy and Sell Stock](charpt1/best_time_to_buy_and_sell_stock1.md)
     * [122. Best Time to Buy and Sell Stock II](charpt1/best_time_to_buy_and_sell_stock2.md)

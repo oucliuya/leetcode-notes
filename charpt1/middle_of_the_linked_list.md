@@ -57,7 +57,7 @@ class Solution {
 
 ## 3 解法二
 
-快慢指针
+快慢指针。创建两个指向链表头的指针slow和fast。slow每次向后移动1位，fast移动两位。当fast到达队尾的时候，slow刚好到达中间。
 
 ```java
 /**
