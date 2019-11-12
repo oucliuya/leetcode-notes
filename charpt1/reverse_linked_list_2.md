@@ -2,6 +2,8 @@
 
 ## 1 题目
 
+参考 [第206题](reverse_linked_list.html)
+
 Reverse a linked list from position m to n. Do it in one-pass.
 
 Note: 1 ≤ m ≤ n ≤ length of list.
@@ -20,6 +22,8 @@ Output: 1->4->3->2->5->NULL
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 ## 2 解法一
+
+迭代法
 
 ```java
 
