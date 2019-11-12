@@ -74,3 +74,38 @@ public class Solution {
 }
 ```
 
+## 3 解法二
+
+还可以用快慢指针。初始化快慢指针，快指针比慢指针提前一步。然后同时开始推进，每次推进快指针比慢指针快1步。如果成环，快指针必定能追上慢指针。
+
+```java
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null || head.next.next == null)
+            return false;
+    	ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
+            if (slow == fast) {
+                return true;
+            }else{
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+        }
+        return false;
+    }
+}
+```
+
