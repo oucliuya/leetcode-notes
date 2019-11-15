@@ -1337,9 +1337,13 @@
                                 <h1 id="20-valid-parentheses">20. Valid Parentheses</h1>
 <h2 id="1-&#x9898;&#x76EE;">1 &#x9898;&#x76EE;</h2>
 <p>Given a string containing just the characters &apos;(&apos;, &apos;)&apos;, &apos;{&apos;, &apos;}&apos;, &apos;[&apos; and &apos;]&apos;, determine if the input string is valid.</p>
+<p>&#x7ED9;&#x4E00;&#x4E2A;&#x53EA;&#x5305;&#x542B; &apos;(&apos;, &apos;)&apos;, &apos;{&apos;, &apos;}&apos;, &apos;[&apos; and &apos;]&apos; &#x8FD9;6&#x79CD;&#x5B57;&#x7B26;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5224;&#x65AD;&#x8F93;&#x5165;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x662F;&#x5426;&#x5408;&#x6CD5;&#x3002;</p>
 <p>An input string is valid if:</p>
+<p>&#x5F53;&#x4E00;&#x4E0B;&#x6761;&#x4EF6;&#x90FD;&#x6EE1;&#x8DB3;&#x65F6;&#xFF0C;&#x8F93;&#x5165;&#x5B57;&#x7B26;&#x4E32;&#x5408;&#x6CD5;&#xFF1A;</p>
 <pre><code>1. Open brackets must be closed by the same type of brackets.
 2. Open brackets must be closed in the correct order.
+1. &#x62EC;&#x53F7;&#x5FC5;&#x987B;&#x5173;&#x95ED;
+2. &#x62EC;&#x53F7;&#x5173;&#x95ED;&#x7684;&#x987A;&#x5E8F;&#x5FC5;&#x987B;&#x6B63;&#x786E;
 </code></pre><p>Note that an empty string is also considered valid.</p>
 <p><strong>Example1:</strong></p>
 <pre><code>Input: &quot;()&quot;
@@ -1359,6 +1363,33 @@ Output: true
 </code></pre><p>&#x6765;&#x6E90;&#xFF1A;&#x529B;&#x6263;&#xFF08;LeetCode&#xFF09;
 &#x94FE;&#x63A5;&#xFF1A;<a href="https://leetcode-cn.com/problems/valid-parentheses" target="_blank">https://leetcode-cn.com/problems/valid-parentheses</a>
 &#x8457;&#x4F5C;&#x6743;&#x5F52;&#x9886;&#x6263;&#x7F51;&#x7EDC;&#x6240;&#x6709;&#x3002;&#x5546;&#x4E1A;&#x8F6C;&#x8F7D;&#x8BF7;&#x8054;&#x7CFB;&#x5B98;&#x65B9;&#x6388;&#x6743;&#xFF0C;&#x975E;&#x5546;&#x4E1A;&#x8F6C;&#x8F7D;&#x8BF7;&#x6CE8;&#x660E;&#x51FA;&#x5904;&#x3002;</p>
+<h2 id="2-&#x89E3;&#x6CD5;1">2 &#x89E3;&#x6CD5;1</h2>
+<p>&#x7528;&#x4E00;&#x4E2A;stack&#x628A;&#x5DE6;&#x62EC;&#x53F7;&#x90FD;&#x8F6C;&#x8D77;&#x6765;&#xFF0C;&#x5F53;&#x9047;&#x5230;&#x53F3;&#x62EC;&#x53F7;&#x65F6;&#x5224;&#x65AD;&#x5B83;&#x662F;&#x5426;&#x548C;&#x6808;&#x9876;&#x7684;&#x5DE6;&#x62EC;&#x53F7;&#x662F;&#x4E00;&#x5BF9;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x662F;&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;false&#x3002;</p>
+<p>&#x5982;&#x679C;&#x662F;&#x5408;&#x6CD5;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x904D;&#x5386;&#x5B8C;&#x6210;&#x540E;&#xFF0C;stack&#x4E00;&#x5B9A;&#x662F;&#x7A7A;&#x7684;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isValid</span><span class="hljs-params">(String s)</span> </span>{
+        Stack&lt;Character&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;Character&gt;();
+        Map&lt;Character,Character&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;Character,Character&gt;();
+        map.put(<span class="hljs-string">&apos;)&apos;</span>, <span class="hljs-string">&apos;(&apos;</span>);
+        map.put(<span class="hljs-string">&apos;]&apos;</span>, <span class="hljs-string">&apos;[&apos;</span>);
+        map.put(<span class="hljs-string">&apos;}&apos;</span>, <span class="hljs-string">&apos;{&apos;</span>);
+        <span class="hljs-keyword">int</span> N = s.length();
+        <span class="hljs-keyword">if</span> (N &lt; <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++) {
+            <span class="hljs-keyword">char</span> curr = s.charAt(i);
+            <span class="hljs-keyword">if</span> (map.containsValue(curr)) {
+                stack.push(curr);
+            }
+            <span class="hljs-keyword">if</span> (map.containsKey(curr)) {
+                <span class="hljs-keyword">if</span> (stack.isEmpty()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+                <span class="hljs-keyword">if</span> (stack.peek() != map.get(curr)) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+                stack.pop();
+            }
+        }
+        <span class="hljs-keyword">return</span> stack.isEmpty();
+    }
+}
+</code></pre>
 
                                 
                                 </section>
@@ -1402,7 +1433,7 @@ Output: true
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"20. Valid Parentheses","level":"1.2.20","depth":2,"next":{"title":"21. Merge Two Sorted Lists","level":"1.2.21","depth":2,"path":"charpt1/merge_two_sorted_lists.md","ref":"charpt1/merge_two_sorted_lists.md","articles":[]},"previous":{"title":"19. Remove Nth Node From End of List","level":"1.2.19","depth":2,"path":"charpt1/remove_nth_node_from_end_of_list.md","ref":"charpt1/remove_nth_node_from_end_of_list.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"charpt1/valid_parentheses.md","mtime":"2019-11-11T07:36:49.826Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-13T03:45:21.724Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"20. Valid Parentheses","level":"1.2.20","depth":2,"next":{"title":"21. Merge Two Sorted Lists","level":"1.2.21","depth":2,"path":"charpt1/merge_two_sorted_lists.md","ref":"charpt1/merge_two_sorted_lists.md","articles":[]},"previous":{"title":"19. Remove Nth Node From End of List","level":"1.2.19","depth":2,"path":"charpt1/remove_nth_node_from_end_of_list.md","ref":"charpt1/remove_nth_node_from_end_of_list.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"charpt1/valid_parentheses.md","mtime":"2019-11-14T03:44:07.833Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-15T14:58:18.115Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

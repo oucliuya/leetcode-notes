@@ -20,3 +20,36 @@ Output: 6
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/trapping-rain-water
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+
+
+## 2 解法一
+
+暴力法：遍历每一块，
+
+1. 求该块左边最大值（包括该块）max_left
+2. 求该块右边最大值 （包括该块）max_right
+3. ans += min( max_left, max_right) - heigt[i]
+
+```
+class Solution {
+    public int trap(int[] height) {
+		
+		int size = height.length;
+		int ans = 0;
+		for (int i = 1; i < size-1; i++) {
+            int max_left = 0, max_right = 0;
+			for (int j = i; j >= 0; j--) {
+				max_left = Math.max(max_left, height[j]);
+			}
+			for (int j = i; j < size; j++) {
+				max_right = Math.max(max_right, height[j]);
+			}
+			
+			ans += Math.min(max_left, max_right) - height[i];
+		}
+		return ans;
+    }
+}
+```
+
