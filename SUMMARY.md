@@ -30,7 +30,7 @@
     * [26. Remove Duplicates From Sorted Array](charpt1/remove_duplicates_from_sorted_arrary.md)
     * [27. Remove Element](charpt1/remove_element.md)
     * [28. Implement strStr](charpt1/implement_strStr.md)
-    * [29. Divide Two Integers](chaprt1/divide_two_integers.md)
+    * [29. Divide Two Integers](charpt1/divide_two_integers.md)
     * [30. Substring with Concatenation of All Words](charpt1/substring_with.concatenation_of_all_words.md)
     * [31. Next Permutation](charpt1/next_permutation.md)
     * [32. Longest Valid Parentheses](charpt1/longest_valid_parentheses.md)
