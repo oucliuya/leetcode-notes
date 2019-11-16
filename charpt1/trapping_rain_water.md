@@ -31,7 +31,7 @@ Output: 6
 2. 求该块右边最大值 （包括该块）max_right
 3. ans += min( max_left, max_right) - heigt[i]
 
-```
+```java
 class Solution {
     public int trap(int[] height) {
 		
@@ -50,6 +50,68 @@ class Solution {
 		}
 		return ans;
     }
+}
+```
+
+## 3 解法二：空间换时间
+
+定义两个数组left_max， right_max; 分别记录每个块的左边最大值和右边最大值。
+
+假设输入为
+
+```
+heights =  {0,1,0,2,1,0,1,3,2,1,2,1}
+```
+
+则从左向右遍历数组，求出left_max为
+
+```
+left_max = {0,1,1,2,2,2,2,3,3,3,3,3}
+```
+
+则从右向左遍历数组，求出right_max为
+
+```
+right_max = {3,3,3,3,3,3,3,3,2,2,2,1}
+```
+
+输出等于
+
+```
+ans += Math.min(left_max[i], right_max[i]) - height[i];
+```
+
+Code:
+
+```java
+class Solution {
+    public int trap(int[] height) {
+		int size = height.length;
+        if (size < 3) return 0;
+		int[] left_max = new int[size];
+		int[] right_max = new int[size];
+		int ans = 0;
+		left_max[0] = height[0];
+		for (int i = 1; i < size; i++) {
+			left_max[i] = Math.max(left_max[i-1], height[i]);
+		}
+		right_max[size - 1] = height[size - 1];
+		for (int i = size - 2; i >= 0; i--) {
+			right_max[i] = Math.max(right_max[i + 1], height[i]);
+		}
+		// for (int i = 0; i < size; i++) {
+		// 	System.out.print(left_max[i]);
+		// }
+		// System.out.println();
+		// for (int i = 0; i < size; i++) {
+		// 	System.out.print(right_max[i]);
+		// }
+		// System.out.println();
+		for (int i = 0; i < size; i++) {
+			ans += Math.min(left_max[i], right_max[i]) - height[i];
+		}
+		return ans;
+	}
 }
 ```
 
