@@ -50,6 +50,8 @@ class Solution {
 
 ## 解法2 非递归
 
+使用双指针，start和end指向要交换的连个元素。 但是不要忘记，我们还需要使用一个指针来遍历整个链表，也就是code里的temp指针。
+
 循环终止条件：start指针和end指针都不为null。
 
 ```java
