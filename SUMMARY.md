@@ -79,6 +79,7 @@
     * [143. Reorder List](charpt1/recorder_list.md)
     * [147. Insertion Sort List](charpt1/insertion_sort_list.md)
     * [148. Sort List](charpt1/sort_list.md)
+    * [155. Min Stack](charpt1/min_stack.md)
     * [160. Intersection of Two Linked Lists](charpt1/intersection_of_two_linked_lists.md)
     * [206. Reverse Linked List](charpt1/reverse_linked_list.md)
     * [234. Palindrome Linked List](charpt1/palindrome_linked_list.md)

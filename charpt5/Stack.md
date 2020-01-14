@@ -47,3 +47,6 @@
 
 [1 leetcode stack](https://leetcode-cn.com/tag/stack/)
 
+## 问题
+
+1. 栈会满吗？如果一直往里面push，肯定会溢出（基于array的实现）。
