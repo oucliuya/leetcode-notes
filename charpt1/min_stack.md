@@ -25,8 +25,8 @@ public class MinStack {
 	}
 	
 	public void pop() {
-		stack.pop();
 		if(stack.peek() == minStack.peek()) minStack.pop();
+    stack.pop();
 	}
 	
 	public int top() {
@@ -45,6 +45,60 @@ public class MinStack {
 
 如果不使用另一个栈来存储最小值序列，可用一个变量存储。但是历史的最小值要压入栈内。
 
+
+
 ### 解法三： 	
 
-如果不使用java的原生栈，那就要使用单链表来实现stack。
+如果不使用java的原生栈，那就要使用单链表来实现stack。链表的结点里面加一个min值，每次push的时候，写入当前最小值到min。
+
+```java
+public class MinStack {
+	class ListNode{
+		int value;
+		int min;
+		ListNode next;
+		ListNode(int val, int min){
+			this.value = val;
+			this.min = min;
+			this.next = null;
+		}
+	}
+	
+	private ListNode stack;
+	public MinStack() {
+	}
+	
+	public void push(int x) {
+		if (this.stack == null) {
+			this.stack = new ListNode(x, x);
+		}else {
+			int min = this.stack.min;
+			if (x < min) min = x;
+			ListNode tmp = new ListNode(x, min);
+			tmp.next = this.stack;
+			this.stack = tmp;
+		}
+	}
+	
+	public void pop() {
+		if (this.stack != null) {
+			this.stack = this.stack.next;
+		}
+	}
+	
+	public int top() {
+		if (this.stack == null)
+			return -1;
+		else
+			return this.stack.value;
+	}
+	
+	public int getMin() {
+		if (this.stack == null)
+			return -1;
+		else
+			return this.stack.min;
+	}
+}
+```
+

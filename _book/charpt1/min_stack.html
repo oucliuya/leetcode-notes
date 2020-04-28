@@ -1560,8 +1560,8 @@
     }
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>{
-        stack.pop();
         <span class="hljs-keyword">if</span>(stack.peek() == minStack.peek()) minStack.pop();
+    stack.pop();
     }
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">top</span><span class="hljs-params">()</span> </span>{
@@ -1576,7 +1576,56 @@
 <h3 id="&#x89E3;&#x6CD5;&#x4E8C;&#xFF1A;">&#x89E3;&#x6CD5;&#x4E8C;&#xFF1A;</h3>
 <p>&#x5982;&#x679C;&#x4E0D;&#x4F7F;&#x7528;&#x53E6;&#x4E00;&#x4E2A;&#x6808;&#x6765;&#x5B58;&#x50A8;&#x6700;&#x5C0F;&#x503C;&#x5E8F;&#x5217;&#xFF0C;&#x53EF;&#x7528;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x5B58;&#x50A8;&#x3002;&#x4F46;&#x662F;&#x5386;&#x53F2;&#x7684;&#x6700;&#x5C0F;&#x503C;&#x8981;&#x538B;&#x5165;&#x6808;&#x5185;&#x3002;</p>
 <h3 id="&#x89E3;&#x6CD5;&#x4E09;&#xFF1A;">&#x89E3;&#x6CD5;&#x4E09;&#xFF1A;</h3>
-<p>&#x5982;&#x679C;&#x4E0D;&#x4F7F;&#x7528;java&#x7684;&#x539F;&#x751F;&#x6808;&#xFF0C;&#x90A3;&#x5C31;&#x8981;&#x4F7F;&#x7528;&#x5355;&#x94FE;&#x8868;&#x6765;&#x5B9E;&#x73B0;stack&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4E0D;&#x4F7F;&#x7528;java&#x7684;&#x539F;&#x751F;&#x6808;&#xFF0C;&#x90A3;&#x5C31;&#x8981;&#x4F7F;&#x7528;&#x5355;&#x94FE;&#x8868;&#x6765;&#x5B9E;&#x73B0;stack&#x3002;&#x94FE;&#x8868;&#x7684;&#x7ED3;&#x70B9;&#x91CC;&#x9762;&#x52A0;&#x4E00;&#x4E2A;min&#x503C;&#xFF0C;&#x6BCF;&#x6B21;push&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5199;&#x5165;&#x5F53;&#x524D;&#x6700;&#x5C0F;&#x503C;&#x5230;min&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MinStack</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ListNode</span></span>{
+        <span class="hljs-keyword">int</span> value;
+        <span class="hljs-keyword">int</span> min;
+        ListNode next;
+        ListNode(<span class="hljs-keyword">int</span> val, <span class="hljs-keyword">int</span> min){
+            <span class="hljs-keyword">this</span>.value = val;
+            <span class="hljs-keyword">this</span>.min = min;
+            <span class="hljs-keyword">this</span>.next = <span class="hljs-keyword">null</span>;
+        }
+    }
+
+    <span class="hljs-keyword">private</span> ListNode stack;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MinStack</span><span class="hljs-params">()</span> </span>{
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>{
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.stack == <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">this</span>.stack = <span class="hljs-keyword">new</span> ListNode(x, x);
+        }<span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">int</span> min = <span class="hljs-keyword">this</span>.stack.min;
+            <span class="hljs-keyword">if</span> (x &lt; min) min = x;
+            ListNode tmp = <span class="hljs-keyword">new</span> ListNode(x, min);
+            tmp.next = <span class="hljs-keyword">this</span>.stack;
+            <span class="hljs-keyword">this</span>.stack = tmp;
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.stack != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">this</span>.stack = <span class="hljs-keyword">this</span>.stack.next;
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">top</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.stack == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">else</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.stack.value;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getMin</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.stack == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">else</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.stack.min;
+    }
+}
+</code></pre>
 
                                 
                                 </section>
@@ -1620,7 +1669,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"155. Min Stack","level":"1.2.78","depth":2,"next":{"title":"160. Intersection of Two Linked Lists","level":"1.2.79","depth":2,"path":"charpt1/intersection_of_two_linked_lists.md","ref":"charpt1/intersection_of_two_linked_lists.md","articles":[]},"previous":{"title":"148. Sort List","level":"1.2.77","depth":2,"path":"charpt1/sort_list.md","ref":"charpt1/sort_list.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"charpt1/min_stack.md","mtime":"2020-01-14T02:16:04.351Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-14T02:16:11.443Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"155. Min Stack","level":"1.2.78","depth":2,"next":{"title":"160. Intersection of Two Linked Lists","level":"1.2.79","depth":2,"path":"charpt1/intersection_of_two_linked_lists.md","ref":"charpt1/intersection_of_two_linked_lists.md","articles":[]},"previous":{"title":"148. Sort List","level":"1.2.77","depth":2,"path":"charpt1/sort_list.md","ref":"charpt1/sort_list.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"charpt1/min_stack.md","mtime":"2020-01-16T02:00:26.670Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-30T14:44:30.460Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

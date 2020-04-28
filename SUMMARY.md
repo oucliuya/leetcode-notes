@@ -106,4 +106,5 @@
     * [5.7. Hash Table](charpt5/hash_table.md)
     * [5.8. Character Tree](charpt5/character_tree.md)
 * [六 算法分类](charpt6/categories.md)
+    * [6.1. sort](charpt6/sort.md)
 
